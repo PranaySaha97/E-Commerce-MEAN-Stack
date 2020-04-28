@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-12"> </div>
+    <div class="col-md-12 col-lg-12 col-12 offset-lg-2 offset-md-2">
+        
+            <button mat-raised-button (click)='goBack()' color='accent'><mat-icon>arrow_back</mat-icon> Dashboard</button>
+        
+    </div>
+</div>
+<div *ngIf="orders">
+    <div class="row">
+        <div class="col-md-8 col-lg-8 offset-lg-2 offset-md-2">
+            <h4>My Orders</h4>
+        </div>
+    </div>
+    <div class="row" *ngFor="let ord of orders">
+        <div class="col-md-8 col-lg-8 offset-lg-2 offset-md-2">
+            <mat-card class="card">
+                <mat-card-content>
+                    <span><h4>{{ord.pName}}</h4></span>
+                    <span class="mySpace"></span>
+                    <strong>Order ID: </strong>{{ord.orderID}} <br>
+                    <strong>Price:</strong>&nbsp;{{(ord.price*(1-ord.pSeller.pDiscount))+ord.pSeller.pShippingCharges | currency:'INR'}}
+                    <span class="mySpace"><strong>Purchase Date: </strong>{{ord.orderDate | date:'mediumDate'}}</span>
+                </mat-card-content>
+            </mat-card>
+        </div>    
+    </div>    
+</div>
+<div class="row" *ngIf="message">
+    <div class="col-md-4 col-lg-4 col-12 offset-md-4 offset-lg-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-danger">{{message}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

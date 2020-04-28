@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-12">
+        <mat-toolbar class="toolbar">
+            <button mat-button (click)="fetchAllProducts()">All</button>
+            <span *ngFor="let category of catArray">
+                <button mat-button (click)="fetchProds(category)">{{category}}</button>&nbsp;
+            </span>
+            <span class="give-space"></span>
+            <mat-form-field>
+                <input matInput #searchName (keyup)="searchProd(searchName.value)"/>
+            </mat-form-field>&nbsp;
+            <mat-icon (click)="searchProd(searchName.value)">search</mat-icon>
+        </mat-toolbar>
+    </div>
+</div>
+<div *ngIf="products" class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-lg-3 d-flex align-items-stretch" *ngFor="let prod of products">
+            <mat-card class="card">
+                <img mat-card-image class="card-img-top" src='../../assets/images/{{prod.image}}' alt='{{prod.image}}' width="100px" height="280px" (click)="viewProd(prod._id)"/>
+                <mat-card-content>
+                    <p class="h6"><strong (click)="viewProd(prod._id)">{{prod.pName}}</strong></p>
+                    <p><strong>Rating:</strong> {{prod.pRating}}/5 <sup><mat-icon color="accent">star</mat-icon></sup></p>
+                    <p><strong>Price:</strong>&nbsp; <del class="text-secondary">{{prod.price | currency:'INR'}}</del><strong>&nbsp;{{prod.price*(1-prod.pSeller.pDiscount) | currency:'INR'}}&nbsp;<sup class="text-info"><strong>{{ prod.pSeller.pDiscount | percent }}</strong></sup></strong></p>
+
+                    <button mat-raised-button class="btn btn-success" (click)="buyProd(prod)" *ngIf="prod.pSeller.pQuantity>0">Buy Now <mat-icon>shopping_cart</mat-icon></button>&nbsp;
+                    
+                    <span *ngIf="prod.pSeller.pQuantity==0">
+                        <button mat-raised-button class="btn btn-danger" (click)="notify(prod)">Notify Me <mat-icon>notifications_active</mat-icon></button>&nbsp;
+                        <strong class="text-danger">Out of stock!</strong>
+                    </span>
+                    <div *ngIf="notifyPid && prod._id==notifyPid" class="alert alert-danger">You will be notified!</div>
+                </mat-card-content>
+                
+            </mat-card>
+        </div>    
+    </div>    
+</div>
+

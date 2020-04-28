@@ -1,0 +1,17 @@
+.prod-card{
+    max-width: 400px;
+}
+.give-space{
+    flex: 1 1 auto;
+}
+.card{
+    margin-top: 20px;
+    transition: transform .2s;
+}
+.card:hover{
+    box-shadow: 5px 5px 15px rgba(55, 69, 192, 0.507);
+    transform: scale(1.02);
+}
+.toolbar{
+    background-color: #e8eaf6;
+}

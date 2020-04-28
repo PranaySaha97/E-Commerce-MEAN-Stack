@@ -1,0 +1,10 @@
+.full-width{
+    width: 100%;
+}
+
+.mycard{
+
+}
+.mycard:hover{
+    box-shadow: 5px 5px 15px rgba(55, 69, 192, 0.507);
+}

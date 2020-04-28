@@ -1,0 +1,41 @@
+
+<div class="row">
+    <div class="col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+        <div class="card">
+            <div *ngIf="prodDetails; else noProd">
+                <div class="card-header text-center">
+                    <div class="card-title h2">Purchase Summary</div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span><strong>Product Name:</strong>&nbsp;{{prodDetails.pName | titlecase}}</span>
+                        <span class="right-disp"><strong>Product ID:</strong>&nbsp;{{prodDetails._id}}</span>
+                    </div>
+                    <div>
+                        <span><strong>Color:</strong>&nbsp;{{prodDetails.color}}</span>
+                    </div>
+                    <div>
+                        <span><strong>Price:</strong>&nbsp;&nbsp;{{prodDetails.price*(1-prodDetails.pSeller.pDiscount) | currency:'INR'}}</span>
+                    </div>
+                    <div>
+                        <p class="text-success">Total price inclusive shipping charges.</p>
+                    </div>
+                    <div>
+                        <p class="alert alert-success text-center">Thank you for choosing us. Please Continue Shopping.</p>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noProd>
+                <p class="text-center text-danger">{{errorMessage}}</p>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-lg-4 col-12 offset-lg-4 offset-md-4 text-center">
+        
+            <button mat-raised-button (click)='goBack()' color='accent'><mat-icon>arrow_back</mat-icon>Continue Shopping</button>
+        
+    </div>
+</div>

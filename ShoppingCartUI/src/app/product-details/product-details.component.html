@@ -1,0 +1,58 @@
+
+<div class="row">
+    <div class="col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+        <div class="card">
+            <div class="row">
+                <div class="col-12">
+                    <button mat-raised-button (click)='goBack()' color='accent'><mat-icon>arrow_back</mat-icon> Dashboard</button>
+                </div>
+
+            </div>
+            <div *ngIf="prodDetails; else noProd">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3">
+                        <div class="text-center">
+                            <img src="../../assets/images/{{prodDetails.image}}" alt="{{prodDetails.image}}" width="400px" height="400px" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-5 offset-md-3 offset-lg-3">
+                        <div>
+                            <div class="h2">{{prodDetails.pName | titlecase}}</div>
+                            <p class="text-secondary">{{prodDetails.pSeller.s_Id}}</p>
+                        </div>
+                        <div>
+                            <div>
+                                <p class="text-info">{{prodDetails.pDescription | titlecase}}</p>
+                                <p><strong>Category:</strong>&nbsp;{{prodDetails.pCategory}}</p>
+                            </div>
+                            <div>
+                                <p><strong>Rating: </strong>&nbsp;{{prodDetails.pRating}}/5 <mat-icon>star</mat-icon></p>
+                            </div>
+                            <div>   
+                                <p><strong>Color:</strong>&nbsp;{{prodDetails.color}}</p>
+                                <p><strong>Stock Left:</strong>&nbsp;{{prodDetails.pSeller.pQuantity}}</p>
+                            </div>
+                            <div>
+                                <p><strong class="h3">{{prodDetails.price*(1-prodDetails.pSeller.pDiscount) | currency:'INR'}}</strong>&nbsp;&nbsp;<del class="text-secondary">{{prodDetails.price | currency:'INR'}}</del>&nbsp; <span class="text-success">{{prodDetails.pSeller.pDiscount | percent}} off!</span></p>
+                            </div>
+                            <div>
+                                <p class="text-success"><strong>Extra {{prodDetails.pSeller.pShippingCharges | currency:'INR'}} Shipping Charges Applicable!</strong></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-success" (click)="buyProd(prodDetails)" *ngIf="prodDetails.pSeller.pQuantity>0">Buy Now <mat-icon>shopping_cart</mat-icon></button>
+                                <span *ngIf="prodDetails.pSeller.pQuantity==0">
+                                    <button class="btn btn-danger" (click)="notify(prodDetails)">Notify Me <mat-icon>notifications_active</mat-icon></button>&nbsp;
+                                    <strong class="text-danger">Out of stock!</strong>
+                                </span>
+                                <div *ngIf="notifyPid && prodDetails._id==notifyPid" class="alert alert-danger">You will be notified!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noProd>
+                <p class="text-center text-danger">{{errorMessage}}</p>
+            </ng-template>
+        </div>
+    </div>
+</div>
