@@ -1,2 +1,2 @@
-## E-Commerce MEAN Stack
-# Developer: Pranay Saha
+# E-Commerce MEAN Stack
+## Developer: Pranay Saha
